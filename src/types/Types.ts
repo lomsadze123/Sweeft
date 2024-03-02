@@ -8,3 +8,9 @@ export interface Image {
   likes: number;
   views: number;
 }
+
+export interface Cache {
+  [key: string]: {
+    [page: number]: Image[];
+  };
+}

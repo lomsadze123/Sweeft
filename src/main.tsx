@@ -3,11 +3,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
+import { ClickIdProvider } from "./context/useClickContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ClickIdProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ClickIdProvider>
   </React.StrictMode>
 );
