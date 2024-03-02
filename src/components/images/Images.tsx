@@ -1,77 +1,68 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import unsplashAPI from "../../utils/API";
 import { Image } from "../../types/Types";
+import useInfiniteScroll from "../../hooks/infiniteScroll/useInfiniteScroll";
+import useThrottledSearch from "../../hooks/throttledSearch/useThrottledSearch";
 
 const Images = () => {
   const [data, setData] = useState<Image[]>([]);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const observer = useRef<IntersectionObserver>();
+  const [prevQuery, setPrevQuery] = useState("");
 
-  // Create a separate ref for the div element
-  const endOfImagesRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetchData();
-
-    observer.current = new IntersectionObserver(
-      (entries) => {
-        const firstEntry = entries[0];
-        if (firstEntry.isIntersecting && !loading) {
-          setPage((prevPage) => prevPage + 1);
-        }
-      },
-      { threshold: 1 }
-    );
-
-    if (observer.current && endOfImagesRef.current) {
-      observer.current.observe(endOfImagesRef.current);
-    }
-
-    return () => {
-      if (observer.current) {
-        observer.current.disconnect();
-      }
-    };
-  }, [query]);
-
-  useEffect(() => {
-    if (page > 1) {
-      fetchData();
-    }
-  }, [page]);
-
-  const fetchData = async () => {
+  const fetchData = async (searchQuery: string, pageNum: number) => {
     try {
       setLoading(true);
       let response;
-      if (query === "") {
+      if (searchQuery === "") {
         response = await unsplashAPI.get("/photos", {
           params: {
             order_by: "popular",
-            per_page: 20, // Load only 20 images initially
-            page: page,
+            per_page: 10,
+            page: pageNum,
           },
         });
       } else {
         response = await unsplashAPI.get("/search/photos", {
           params: {
-            query: query,
-            per_page: 20, // Load only 20 images initially
-            page: page,
+            query: searchQuery,
+            per_page: 10,
+            page: pageNum,
           },
         });
       }
 
       const newData = response.data.results || response.data;
-      setData((prevData) => [...prevData, ...newData]);
+      if (pageNum === 1) {
+        setData(newData); // If it's the first page, replace data with new results
+      } else {
+        setData((prevData) => [...prevData, ...newData]); // Otherwise append to existing data
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
     }
   };
+
+  const handleSearchChange = useThrottledSearch((searchQuery: string) => {
+    if (searchQuery !== prevQuery) {
+      setPrevQuery(searchQuery);
+      setPage(1); // Reset page when the search query changes
+      fetchData(searchQuery, 1); // Fetch first page of search results
+    }
+  }, 600);
+
+  useEffect(() => {
+    fetchData(query, page); // Fetch data based on current page and query
+  }, [page]);
+
+  const fetchMoreData = () => {
+    setPage((prevPage) => prevPage + 1); // Increment page for infinite scroll
+  };
+
+  useInfiniteScroll(fetchMoreData);
 
   return (
     <div>
@@ -83,7 +74,10 @@ const Images = () => {
           id="search"
           placeholder="search..."
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            handleSearchChange(e); // Pass the event object to handleSearchChange
+          }}
         />
       </form>
       <div className="flex justify-center gap-5 flex-wrap">
@@ -101,8 +95,7 @@ const Images = () => {
           </div>
         ))}
       </div>
-      {/* Assign the ref to the div element */}
-      <div id="end-of-images" ref={endOfImagesRef}></div>
+      <div id="end-of-images"></div>
       {loading && <p className="text-center">Loading...</p>}
     </div>
   );
