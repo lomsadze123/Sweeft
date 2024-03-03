@@ -20,10 +20,10 @@ The Images app is a web application designed to search for and display images ba
 
 ## 🚀 Technologies Used
 
-- React: The front-end framework used for building the user interface.
-- React Context: Used to manage global state related to the clicked image ID.
-- Intersection Observer API: Utilized for implementing infinite scrolling functionality.
-- Throttling: Implemented for controlling the rate of execution of search queries to prevent performance issues.
+- **React:** The front-end framework used for building the user interface.
+- **React Context:** Used to manage global state related to the clicked image ID.
+- **Intersection Observer API:** Utilized for implementing infinite scrolling functionality.
+- **Throttling:** Implemented for controlling the rate of execution of search queries to prevent performance issues.
 
 ### 🔄 Scroll Handling
 
@@ -117,16 +117,6 @@ npm run dev
 ## 🚀 View Live Demo
 
 Visit the live demo: [Image App for sweeft](https://main--tbc-usaid-marteli.netlify.app/)
-
-<!-- ## 🌟 Features
-
-- :iphone: Responsive Navigation (Flex, Grid)
-- :art: Dynamic Rendering
-- :flower_playing_cards: Card Components
-- :carousel_horse: Slider
-- :accordion: Accordion
-- :building_construction: Model-View-Controller (MVC) Architecture
-- :gear: Throttling -->
 
 ## Authors
 
