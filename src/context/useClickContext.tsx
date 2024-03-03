@@ -21,9 +21,10 @@ export const ClickIdProvider: React.FC<ClickIdProviderProps> = ({
   children,
 }) => {
   const [clickId, setClickId] = useState("");
+  const [query, setQuery] = useState<string>("");
 
   return (
-    <ClickIdContext.Provider value={{ clickId, setClickId }}>
+    <ClickIdContext.Provider value={{ clickId, setClickId, query, setQuery }}>
       {children}
     </ClickIdContext.Provider>
   );

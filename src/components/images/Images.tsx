@@ -6,6 +6,7 @@ const Images = () => {
   const { data, loading, query, setQuery, handleSearchChange } =
     useImageSearch();
   const { clickId, setClickId } = useClickId();
+  console.log(query);
 
   return (
     <div>

@@ -3,10 +3,11 @@ import unsplashAPI from "../../utils/API";
 import { Image, Cache } from "../../types/Types";
 import useInfiniteScroll from "../infiniteScroll/useInfiniteScroll";
 import useThrottledSearch from "../throttledSearch/useThrottledSearch";
+import useClickId from "../../context/useClickContext";
 
 const useImageSearch = () => {
   const [data, setData] = useState<Image[]>([]);
-  const [query, setQuery] = useState<string>("");
+  const { query, setQuery } = useClickId();
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   const [prevQuery, setPrevQuery] = useState<string>("");
@@ -64,7 +65,18 @@ const useImageSearch = () => {
   };
 
   const handleSearchChange = useThrottledSearch((searchQuery: string) => {
-    console.log(searchQuery);
+    if (searchQuery) {
+      const existingHistory: string[] = JSON.parse(
+        localStorage.getItem("searchHistory") || "[]"
+      );
+      // Check if the word is not already present in the search history
+      if (!existingHistory.includes(searchQuery)) {
+        // Append the new word to the existing list
+        const updatedHistory = [...existingHistory, searchQuery];
+        // Save the updated list back to local storage
+        localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
+      }
+    }
 
     if (searchQuery !== prevQuery) {
       setPrevQuery(searchQuery);
