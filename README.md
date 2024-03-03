@@ -12,11 +12,11 @@ The Images app is a web application designed to search for and display images ba
 
 # 🚀 Features
 
-- Search Functionality: Users can input search queries to find images related to their interests.
-- Image Display: Search results are displayed as a grid of images, allowing users to easily browse through them.
-- Modal Overlay: Clicking on an image opens it in a modal overlay, providing a larger view and additional details.
-- Infinite Scrolling: More images are loaded as the user scrolls down the page, providing a seamless browsing experience.
-- Scroll-to-Top Button: Users can easily return to the top of the page by clicking on a scroll-to-top button.
+- **Search Functionality:** Users can input search queries to find images related to their interests.
+- **Image Display:** Search results are displayed as a grid of images, allowing users to easily browse through them.
+- **Modal Overlay:** Clicking on an image opens it in a modal overlay, providing a larger view and additional details.
+- **Infinite Scrolling:** More images are loaded as the user scrolls down the page, providing a seamless browsing experience.
+- **Scroll-to-Top Button:** Users can easily return to the top of the page by clicking on a scroll-to-top button.
 
 ## 🚀 Technologies Used
 
