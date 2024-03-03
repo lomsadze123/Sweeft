@@ -66,7 +66,7 @@ The project follows a modular structure to maintain clarity and scalability:
 
 ## ✔️ Check
 
-Before running or contributing to the TBC-USAID Academy project, make sure to check the following:
+Before running or contributing to the Images app project, make sure to check the following:
 
 ### 🌐 Browser Compatibility
 
