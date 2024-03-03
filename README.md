@@ -116,7 +116,7 @@ npm run dev
 
 ## 🚀 View Live Demo
 
-Visit the live demo: [Image App for sweeft](https://main--tbc-usaid-marteli.netlify.app/)
+Visit the live demo: [Image App for sweeft](https://sweeft-marteli.netlify.app/)
 
 ## Authors
 
