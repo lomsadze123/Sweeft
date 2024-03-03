@@ -5,9 +5,9 @@ The Images app is a web application designed to search for and display images ba
 ## 🖼️ Screenshots
 
 <p align="center">
-  <img src="https://github.com/lomsadze123/TBC-USAID/assets/91826108/1ae22938-7239-4986-8af0-3f266c09f31d" alt="Image 1">
-  <img src="https://github.com/lomsadze123/TBC-USAID/assets/91826108/987126e3-8666-470b-9058-f005e1a167be" alt="Image 2">
-  <img src="https://github.com/lomsadze123/TBC-USAID/assets/91826108/2ccbc353-cde5-4847-ad2f-4eeaf5f41bcd" alt="Image 3">
+  <img src="https://github.com/lomsadze123/Sweeft/assets/91826108/35c55a55-a192-4281-9b02-445e4ca982d5" alt="Image 1">
+  <img src="https://github.com/lomsadze123/Sweeft/assets/91826108/6a803cf6-fe25-4747-820f-1057ab8debb0" alt="Image 2">
+  <img src="https://github.com/lomsadze123/Sweeft/assets/91826108/544ad439-49a4-4afe-a52f-a58d0de8bc2b" alt="Image 3">
 </p>
 
 # 🚀 Features
