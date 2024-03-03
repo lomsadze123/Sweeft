@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import unsplashAPI from "../../utils/API";
-import { Image, Cache } from "../../types/Types";
+import { Image, Cache, Query } from "../../types/Types";
 import useInfiniteScroll from "../infiniteScroll/useInfiniteScroll";
 import useThrottledSearch from "../throttledSearch/useThrottledSearch";
-import useClickId from "../../context/useClickContext";
+import { useLocation } from "react-router-dom";
 
-const useImageSearch = () => {
+const useImageSearch = ({ query }: Query) => {
   const [data, setData] = useState<Image[]>([]);
-  const { query, setQuery } = useClickId();
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   const [prevQuery, setPrevQuery] = useState<string>("");
   const [cache, setCache] = useState<Cache>({});
+  const location = useLocation();
 
   const fetchData = async (searchQuery: string, pageNum: number) => {
     try {
@@ -86,8 +86,16 @@ const useImageSearch = () => {
   }, 600);
 
   useEffect(() => {
-    fetchData(query, page); // Fetch data based on current page and query
+    if (page !== 1) {
+      fetchData(query, page);
+    }
   }, [page]);
+
+  useEffect(() => {
+    // Cleanup function to clear data and cache when the location changes
+    setData([]);
+    setCache({});
+  }, [location.pathname]);
 
   const fetchMoreData = () => {
     setPage((prevPage) => prevPage + 1); // Increment page for infinite scroll
@@ -95,7 +103,7 @@ const useImageSearch = () => {
 
   useInfiniteScroll(fetchMoreData);
 
-  return { data, loading, query, setQuery, handleSearchChange };
+  return { data, loading, handleSearchChange, page };
 };
 
 export default useImageSearch;

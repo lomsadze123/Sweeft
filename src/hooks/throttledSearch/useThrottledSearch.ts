@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 
-const useThrottledSearch = (callback: Function, delay: number) => {
+const useThrottledSearch = (
+  callback: (term: string) => void,
+  delay: number
+) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {

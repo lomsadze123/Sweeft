@@ -1,12 +1,14 @@
 import useImageSearch from "../../hooks/fetch/useImageSearch";
 import Modal from "../modal/Modal";
 import useClickId from "../../context/useClickContext";
+import { Query } from "../../types/Types";
 
-const Images = () => {
-  const { data, loading, query, setQuery, handleSearchChange } =
-    useImageSearch();
+const Images = ({ query, setQuery }: Query) => {
   const { clickId, setClickId } = useClickId();
-  console.log(query);
+  const { data, loading, handleSearchChange, page } = useImageSearch({
+    query,
+    setQuery,
+  });
 
   return (
     <div>
@@ -46,6 +48,19 @@ const Images = () => {
       <div id="end-of-images"></div>
       {loading && <p className="text-center">Loading...</p>}
       {clickId && <Modal />}
+      <button
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })
+        }
+        className={`${
+          page > 2 ? "fixed" : "hidden"
+        } top-50 bottom-10 right-10 w-20 h-10 rounded-full bg-red-400`}
+      >
+        scroll up
+      </button>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const useShowModal = (imageId: string | undefined) => {
       const response = await unsplashAPI.get(`/photos/${imageId}`);
       setImage(response.data);
     } catch (error) {
-      console.log(error);
+      console.log("Error fetching image:", error);
     }
   };
 

@@ -41,7 +41,7 @@ const useInfiniteScroll = (callback: Function) => {
 
     callback();
     setIsFetching(false);
-  }, [isFetching]);
+  }, [isFetching, callback]);
 
   return setIsFetching;
 };

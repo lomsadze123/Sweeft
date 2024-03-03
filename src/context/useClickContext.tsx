@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
+import { ClickIdContextType } from "../types/Types";
 
 // Create a context for the clickId state
-export const ClickIdContext = createContext<any>(null);
+export const ClickIdContext = createContext<ClickIdContextType | null>(null);
 
 // Custom hook for using the clickId state
 export const useClickId = () => {
@@ -21,10 +22,9 @@ export const ClickIdProvider: React.FC<ClickIdProviderProps> = ({
   children,
 }) => {
   const [clickId, setClickId] = useState("");
-  const [query, setQuery] = useState<string>("");
 
   return (
-    <ClickIdContext.Provider value={{ clickId, setClickId, query, setQuery }}>
+    <ClickIdContext.Provider value={{ clickId, setClickId }}>
       {children}
     </ClickIdContext.Provider>
   );

@@ -1,34 +1,34 @@
-import { useState } from "react";
 import Images from "../../components/images/Images";
-import useClickId from "../../context/useClickContext";
+import { Query } from "../../types/Types";
 
-const History = () => {
-  const { query, setQuery } = useClickId();
-  const [clicked, setClicked] = useState(false);
+const History = ({ query, setQuery }: Query) => {
   const existingHistory: string[] = JSON.parse(
     localStorage.getItem("searchHistory") || "[]"
   );
 
+  const handleHistoryClick = (history: string) => {
+    setQuery(history);
+  };
+
   return (
     <div>
       <h1 className="my-8 text-3xl text-center font-bold">
-        Words for which you searched
+        {existingHistory.length > 0
+          ? "Words for which you searched"
+          : "You have no history yet"}
       </h1>
       <div className="flex justify-center gap-6 text-2xl text-white">
-        {existingHistory.map((history, index) => (
+        {existingHistory.map((history) => (
           <button
-            onClick={() => {
-              setQuery(history);
-              setClicked(true);
-            }}
+            onClick={() => handleHistoryClick(history)}
             className="bg-blue-500 p-2 rounded-lg"
-            key={history + index}
+            key={history}
           >
             {history}
           </button>
         ))}
       </div>
-      {clicked && <Images key={query} />}
+      {query && <Images key={query} query={query} setQuery={setQuery} />}
     </div>
   );
 };

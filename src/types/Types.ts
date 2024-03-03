@@ -14,3 +14,13 @@ export interface Cache {
     [page: number]: Image[];
   };
 }
+
+export interface Query {
+  query: string;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface ClickIdContextType {
+  clickId: string;
+  setClickId: (id: string) => void;
+}

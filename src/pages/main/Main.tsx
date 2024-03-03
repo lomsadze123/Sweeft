@@ -1,9 +1,10 @@
 import Images from "../../components/images/Images";
+import { Query } from "../../types/Types";
 
-const Main = () => {
+const Main = ({ query, setQuery }: Query) => {
   return (
     <main>
-      <Images />
+      <Images query={query} setQuery={setQuery} />
     </main>
   );
 };
