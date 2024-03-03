@@ -18,7 +18,7 @@ const Modal = () => {
       onClick={handleParentClick}
       className="fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-50 flex flex-col justify-center items-center"
     >
-      <div className="w-1/2 mx-auto bg-white">
+      <div className="w-full max-w-[960px] mx-auto bg-white">
         <div className="w-full h-[634px]">
           {image && (
             <img
